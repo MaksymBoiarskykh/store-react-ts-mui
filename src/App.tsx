@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { Header } from "./components/Header";
+import { useActions } from "./hooks/useAction";
+import { useTypedSelector } from "./hooks/useTypedSelector";
+import { ListProducts } from "./components/ListProducts";
 
-function App() {
+const App = () => {
+  const { fetchProducts } = useActions();
+  const { products } = useTypedSelector((state) => state.productsReducer);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  console.log(products);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <ListProducts products={products} />
     </div>
   );
-}
+};
 
 export default App;
