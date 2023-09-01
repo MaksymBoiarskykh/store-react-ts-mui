@@ -1,14 +1,14 @@
 import { FC } from "react";
-import { Box } from "@mui/material";
 import { Header } from "./components/Header";
-import { Products } from "./pages/Products";
+import { BrowserRouter } from "react-router-dom";
+import { AppRouter } from "./components/AppRouter";
 
 const App: FC = () => {
   return (
-    <Box className="App">
+    <BrowserRouter>
       <Header />
-      <Products />
-    </Box>
+      <AppRouter />
+    </BrowserRouter>
   );
 };
 

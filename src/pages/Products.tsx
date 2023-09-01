@@ -7,10 +7,8 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CircularProgress } from "@mui/material";
-import { useFiltering } from "../utils/useFiltering";
+import { useFiltering } from "../hooks/useFiltering";
 import { IProduct } from "../models/IProduct";
-
-const drawerWidth = 240;
 
 export const Products: FC = () => {
   const { fetchProducts } = useActions();
@@ -19,8 +17,7 @@ export const Products: FC = () => {
   );
   const [category, setCategory] = useState("");
   const [rating, setRating] = useState<number | null>(null);
-
-  const filteredProducts: IProduct[] = useFiltering(rating, products);
+  const [priceRange, setPriceRange] = useState<number[]>([0, 1000]);
 
   const addCategory = (value: string) => {
     if (value === "all") {
@@ -30,9 +27,19 @@ export const Products: FC = () => {
     }
   };
 
+  const handleChange = (newValue: number | number[]) => {
+    setPriceRange(newValue as number[]);
+  };
+
   useEffect(() => {
     fetchProducts(category);
   }, [category]);
+
+  const filteredProducts: IProduct[] = useFiltering(
+    rating,
+    priceRange,
+    products
+  );
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -41,10 +48,10 @@ export const Products: FC = () => {
         variant="permanent"
         open={true}
         sx={{
-          width: drawerWidth,
+          width: 240,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
+            width: 240,
             boxSizing: "border-box",
           },
         }}
@@ -53,6 +60,8 @@ export const Products: FC = () => {
           addCategory={addCategory}
           setRating={setRating}
           rating={rating}
+          priceRange={priceRange}
+          handleChange={handleChange}
         />
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, mt: 7 }}>

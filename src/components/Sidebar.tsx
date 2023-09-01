@@ -3,8 +3,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { FC } from "react";
-import { Box, Rating, Typography } from "@mui/material";
+import { FC, useState } from "react";
+import { Box, Rating, Slider, Typography } from "@mui/material";
 
 const categories: string[] = [
   "all",
@@ -17,10 +17,18 @@ const categories: string[] = [
 interface ISidebar {
   addCategory: (value: string) => void;
   setRating: (rating: number | null) => void;
+  handleChange: (value: number | number[]) => void;
   rating: number | null;
+  priceRange: number[];
 }
 
-export const Sidebar: FC<ISidebar> = ({ addCategory, setRating, rating }) => {
+export const Sidebar: FC<ISidebar> = ({
+  addCategory,
+  setRating,
+  handleChange,
+  priceRange,
+  rating,
+}) => {
   return (
     <form>
       <FormControl>
@@ -39,14 +47,24 @@ export const Sidebar: FC<ISidebar> = ({ addCategory, setRating, rating }) => {
           ))}
         </RadioGroup>
       </FormControl>
-      <Box sx={{ mt: 5 }}>
+      <Box sx={{ mt: 3 }}>
         <Typography component="legend">Rating</Typography>
         <Rating
-          name="simple-controlled"
           value={rating}
           onChange={(_, newValue) => {
             setRating(newValue);
           }}
+        />
+      </Box>
+      <Box sx={{ width: "90%", mt: 3 }}>
+        <Typography component="legend">Price Range</Typography>
+        <Slider
+          getAriaLabel={() => "Temperature range"}
+          max={1000}
+          min={0}
+          valueLabelDisplay="auto"
+          value={priceRange}
+          onChange={(_, newValue) => handleChange(newValue)}
         />
       </Box>
     </form>

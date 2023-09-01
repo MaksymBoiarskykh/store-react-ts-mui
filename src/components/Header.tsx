@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { ShoppingBasket } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
 
 export const Header = () => {
@@ -21,15 +22,26 @@ export const Header = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ mr: 5 }}>
-            Home
-          </Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Products
-          </Typography>
+          <Link className="link" to="/">
+            <Typography variant="h6" component="div" sx={{ mr: 5 }}>
+              Home
+            </Typography>
+          </Link>
+          <Link className="link" to="/products">
+            <Typography variant="h6" component="div" sx={{ mr: 5 }}>
+              Products
+            </Typography>
+          </Link>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          ></Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
-              <ShoppingBasket />
+              <Link className="link" to="/basket">
+                <ShoppingBasket />
+              </Link>
             </Badge>
           </IconButton>
         </Toolbar>

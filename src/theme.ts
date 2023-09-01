@@ -5,10 +5,14 @@ export const getDesignTokens = (mode: "dark" | "light") => ({
       ? {
           primary: { main: "#523634" },
           secondary: { main: "#DDC5A2" },
+          info: { main: "#B6452C" },
+          brigth: { main: "##f54545" },
         }
       : {
           primary: { main: "#DDC5A2" },
           secondary: { main: "#523634" },
+          info: { main: "#B6452C" },
+          brigth: { main: "##f54545" },
         }),
   },
 });
