@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/store-react-ts-mui/static/css/main.cddcb7d0.css",
+    "main.js": "/store-react-ts-mui/static/js/main.794d378c.js",
+    "index.html": "/store-react-ts-mui/index.html",
+    "main.cddcb7d0.css.map": "/store-react-ts-mui/static/css/main.cddcb7d0.css.map",
+    "main.794d378c.js.map": "/store-react-ts-mui/static/js/main.794d378c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cddcb7d0.css",
+    "static/js/main.794d378c.js"
+  ]
+}
