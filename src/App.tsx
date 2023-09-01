@@ -1,24 +1,14 @@
-import { useEffect } from "react";
+import { FC } from "react";
+import { Box } from "@mui/material";
 import { Header } from "./components/Header";
-import { useActions } from "./hooks/useAction";
-import { useTypedSelector } from "./hooks/useTypedSelector";
-import { ListProducts } from "./components/ListProducts";
+import { Products } from "./pages/Products";
 
-const App = () => {
-  const { fetchProducts } = useActions();
-  const { products } = useTypedSelector((state) => state.productsReducer);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  console.log(products);
-
+const App: FC = () => {
   return (
-    <div className="App">
+    <Box className="App">
       <Header />
-      <ListProducts products={products} />
-    </div>
+      <Products />
+    </Box>
   );
 };
 

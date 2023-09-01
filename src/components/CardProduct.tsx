@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { IProduct } from "../models/IProduct";
-import { FC } from "react";
+import { FC, memo } from "react";
 
 interface ICardProduct {
   product: IProduct;
@@ -14,10 +14,10 @@ interface ICardProduct {
 
 export const CardProduct: FC<ICardProduct> = ({ product }) => {
   return (
-    <Grid item xs={6} sm={4} md={3}>
+    <Grid item xs={12} sm={12} md={6} lg={4}>
       <Card
         sx={{
-          maxHeight: 400,
+          height: "100%",
         }}
       >
         <Box
@@ -32,22 +32,20 @@ export const CardProduct: FC<ICardProduct> = ({ product }) => {
         >
           <CardMedia
             component="img"
-            alt="green iguana"
+            alt={product.title}
             sx={{
               maxWidth: "80%",
               width: "auto",
-              maxHeight: "100%",
             }}
             image={product.image}
           />
         </Box>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
+          <Typography gutterBottom variant="h6" component="div">
+            {product.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {product.price}
           </Typography>
         </CardContent>
         <CardActions>

@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { getDesignTokens } from "./theme";
 import { setupStore } from "./store/store";
-import "./style/normalize.css";
+import "./styles/index.scss";
 import App from "./App";
 
 const root = ReactDOM.createRoot(
