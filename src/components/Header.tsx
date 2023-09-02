@@ -7,8 +7,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { ShoppingBasket } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 export const Header = () => {
+  const { products } = useTypedSelector((state) => state.basketProductsReducer);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{ zIndex: 1201 }}>
@@ -38,7 +41,7 @@ export const Header = () => {
             sx={{ flexGrow: 1 }}
           ></Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={products.length} color="secondary">
               <Link className="link" to="/basket">
                 <ShoppingBasket />
               </Link>

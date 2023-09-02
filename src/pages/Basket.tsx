@@ -1,11 +1,11 @@
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import List from "@mui/material/List";
-import { Alert, Container, Snackbar } from "@mui/material";
+import { Container } from "@mui/material";
 import BasketProduct from "../components/BasketProduct";
 
 export const Basket = () => {
   const { products } = useTypedSelector((state) => state.basketProductsReducer);
-  console.log(products);
+
   return (
     <Container sx={{ mt: 10 }}>
       <List dense sx={{ width: "100%" }}>

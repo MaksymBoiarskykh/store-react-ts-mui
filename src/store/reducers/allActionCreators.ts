@@ -1,8 +1,8 @@
-import { productsActionCreators } from "./reducers/products/productsActionCreators";
+import { productsActionCreators } from "./products/productsActionCreators";
 import {
   selectProduct,
   removeProduct,
-} from "./reducers/basketProducts/basketProductsSlice";
+} from "./basketProducts/basketProductsSlice";
 
 // собираем все action creators для передачи его в кастомный хук useAction
 export const allActionCreators = {

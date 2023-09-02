@@ -3,8 +3,8 @@ import { Provider } from "react-redux";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { getDesignTokens } from "./theme";
 import { setupStore } from "./store/store";
-import "./styles/index.scss";
 import App from "./App";
+import "./styles/index.scss";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
