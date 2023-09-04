@@ -7,29 +7,15 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { IProduct } from "../models/IProduct";
 import { FC } from "react";
-import { useActions } from "../hooks/useAction";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { ISnackBar } from "../models/ISnackBar";
 import { useNavigate } from "react-router-dom";
+import BasketButton from "./BasketButton";
 
 interface ICardProduct {
   product: IProduct;
-  setMassage: (value: ISnackBar) => void;
 }
 
-export const CardProduct: FC<ICardProduct> = ({ product, setMassage }) => {
-  const { products } = useTypedSelector((state) => state.basketProductsReducer);
-  const { selectProduct } = useActions();
+export const CardProduct: FC<ICardProduct> = ({ product }) => {
   const navigate = useNavigate();
-
-  const pushToBasket = () => {
-    if (!products.some((el) => el.id === product.id)) {
-      selectProduct(product);
-      setMassage({ status: true, text: "product add to basket" });
-    } else {
-      setMassage({ status: true, text: "product has already added to basket" });
-    }
-  };
 
   return (
     <>
@@ -80,14 +66,7 @@ export const CardProduct: FC<ICardProduct> = ({ product, setMassage }) => {
             </Box>
           </CardContent>
           <CardActions>
-            <Button
-              size="small"
-              variant="contained"
-              color="info"
-              onClick={pushToBasket}
-            >
-              Add to basket
-            </Button>
+            <BasketButton id={+product.id - 1}>Add to basket</BasketButton>
             <Button
               size="small"
               variant="outlined"

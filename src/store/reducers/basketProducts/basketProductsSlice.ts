@@ -1,25 +1,22 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IProduct } from "../../../models/IProduct";
 
 interface todoState {
-  products: IProduct[];
+  idProducts: number[];
 }
 
 const initialState: todoState = {
-  products: [],
+  idProducts: [],
 };
 
 export const basketProductsSlice = createSlice({
   name: "basketProductsSlice",
   initialState,
   reducers: {
-    selectProduct(state, action: PayloadAction<IProduct>) {
-      state.products.push(action.payload);
+    selectProduct(state, action: PayloadAction<number>) {
+      state.idProducts.push(action.payload);
     },
-    removeProduct(state, action: PayloadAction<IProduct>) {
-      state.products = state.products.filter(
-        (el) => el.id !== action.payload.id
-      );
+    removeProduct(state, action: PayloadAction<number>) {
+      state.idProducts = state.idProducts.filter((id) => id !== action.payload);
     },
   },
 });

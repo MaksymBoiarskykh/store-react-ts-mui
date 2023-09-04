@@ -10,7 +10,9 @@ import { Badge } from "@mui/material";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 
 export const Header = () => {
-  const { products } = useTypedSelector((state) => state.basketProductsReducer);
+  const { idProducts } = useTypedSelector(
+    (state) => state.basketProductsReducer
+  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -41,7 +43,7 @@ export const Header = () => {
             sx={{ flexGrow: 1 }}
           ></Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={products.length} color="secondary">
+            <Badge badgeContent={idProducts.length} color="secondary">
               <Link className="link" to="/basket">
                 <ShoppingBasket />
               </Link>

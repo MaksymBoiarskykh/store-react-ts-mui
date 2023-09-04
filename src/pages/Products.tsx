@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { ListProducts } from "../components/ListProducts";
 import { useActions } from "../hooks/useAction";
 import { useTypedSelector } from "../hooks/useTypedSelector";
@@ -18,6 +18,7 @@ export const Products: FC = () => {
   const [category, setCategory] = useState("");
   const [rating, setRating] = useState<number | null>(null);
   const [priceRange, setPriceRange] = useState<number[]>([0, 1000]);
+  const [open, setOpen] = useState(true);
 
   const addCategory = (value: string) => {
     if (value === "all") {
@@ -45,8 +46,8 @@ export const Products: FC = () => {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <Drawer
-        variant="permanent"
-        open={true}
+        variant="persistent"
+        open={open}
         sx={{
           width: 240,
           flexShrink: 0,
