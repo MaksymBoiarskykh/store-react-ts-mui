@@ -7,14 +7,14 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { BasketTableRow } from "./BasketTableRow";
+import { FC } from "react";
 
 const rows: string[] = ["image", "number", "price", "remove"];
 
-export const BasketTable = () => {
-  const { idProducts } = useTypedSelector(
-    (state) => state.basketProductsReducer
-  );
-
+interface IBasketTable {
+  idProducts: number[];
+}
+export const BasketTable: FC<IBasketTable> = ({ idProducts }) => {
   return (
     <TableContainer component={Paper}>
       <Table>

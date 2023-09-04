@@ -1,4 +1,5 @@
 import { productsActionCreators } from "./products/productsActionCreators";
+import { changeSidebarStatus } from "./sidebar/sidebarSlice";
 import {
   selectProduct,
   removeProduct,
@@ -9,4 +10,5 @@ export const allActionCreators = {
   ...productsActionCreators,
   selectProduct,
   removeProduct,
+  changeSidebarStatus,
 };

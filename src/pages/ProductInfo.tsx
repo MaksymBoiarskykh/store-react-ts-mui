@@ -26,6 +26,8 @@ export const ProductInfo = () => {
     );
   }
 
+  const id = Number(param.id) - 1;
+
   return (
     <Container sx={{ mt: 10 }}>
       <Card
@@ -43,12 +45,12 @@ export const ProductInfo = () => {
           }}
         >
           <Typography variant="h4" sx={{ flex: "1 0 auto" }}>
-            {products[Number(param.id)].title}
+            {products[id].title}
           </Typography>
           <Typography
             sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
           >
-            {products[Number(param.id)].description}
+            {products[id].description}
           </Typography>
           <Box
             sx={{
@@ -58,11 +60,9 @@ export const ProductInfo = () => {
               mb: 1,
             }}
           >
+            <Typography variant="h5">price: {products[id].price}₴</Typography>
             <Typography variant="h5">
-              price: {products[Number(param.id)].price}₴
-            </Typography>
-            <Typography variant="h5">
-              rating: {products[Number(param.id)].rating.rate}/5
+              rating: {products[id].rating.rate}/5
             </Typography>
           </Box>
           <BasketButton id={+param.id}>Add to basket</BasketButton>
@@ -70,7 +70,7 @@ export const ProductInfo = () => {
         <CardMedia
           component="img"
           sx={{ maxWidth: "25%", width: "200px" }}
-          image={products[Number(param.id)].image}
+          image={products[id].image}
           alt="Live from space album cover"
         />
       </Card>

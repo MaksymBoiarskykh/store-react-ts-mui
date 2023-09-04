@@ -8,30 +8,32 @@ import { ShoppingBasket } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
 import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useActions } from "../hooks/useAction";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import { useScreenSize } from "../hooks/useScreenSize";
 
 export const Header = () => {
   const { idProducts } = useTypedSelector(
     (state) => state.basketProductsReducer
   );
+  const isBigSize = useScreenSize();
+  const { changeSidebarStatus } = useActions();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{ zIndex: 1201 }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Link className="link" to="/">
-            <Typography variant="h6" component="div" sx={{ mr: 5 }}>
-              Home
-            </Typography>
-          </Link>
+          {!isBigSize && (
+            <IconButton
+              onClick={() => changeSidebarStatus()}
+              size="large"
+              edge="start"
+              color="inherit"
+              sx={{ mr: 2 }}
+            >
+              <FilterAltIcon />
+            </IconButton>
+          )}
           <Link className="link" to="/products">
             <Typography variant="h6" component="div" sx={{ mr: 5 }}>
               Products

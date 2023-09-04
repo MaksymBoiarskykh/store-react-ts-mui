@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { ListProducts } from "../components/ListProducts";
 import { useActions } from "../hooks/useAction";
 import { useTypedSelector } from "../hooks/useTypedSelector";
@@ -9,16 +9,18 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CircularProgress } from "@mui/material";
 import { useFiltering } from "../hooks/useFiltering";
 import { IProduct } from "../models/IProduct";
+import { useScreenSize } from "../hooks/useScreenSize";
 
 export const Products: FC = () => {
   const { fetchProducts } = useActions();
   const { products, isLoading } = useTypedSelector(
     (state) => state.productsReducer
   );
+  const { open } = useTypedSelector((state) => state.sidebarReducer);
   const [category, setCategory] = useState("");
   const [rating, setRating] = useState<number | null>(null);
   const [priceRange, setPriceRange] = useState<number[]>([0, 1000]);
-  const [open, setOpen] = useState(true);
+  const isBigSize = useScreenSize();
 
   const addCategory = (value: string) => {
     if (value === "all") {
@@ -47,12 +49,12 @@ export const Products: FC = () => {
       <CssBaseline />
       <Drawer
         variant="persistent"
-        open={open}
+        open={isBigSize || open}
         sx={{
-          width: 240,
+          width: isBigSize ? 260 : "none",
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: 240,
+            width: isBigSize ? 260 : "none",
             boxSizing: "border-box",
           },
         }}
