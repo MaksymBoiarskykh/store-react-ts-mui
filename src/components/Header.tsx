@@ -44,13 +44,13 @@ export const Header = () => {
             component="div"
             sx={{ flexGrow: 1 }}
           ></Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={idProducts.length} color="secondary">
-              <Link className="link" to="/basket">
+          <Link className="link" to="/basket">
+            <IconButton color="inherit">
+              <Badge badgeContent={idProducts.length} color="secondary">
                 <ShoppingBasket />
-              </Link>
-            </Badge>
-          </IconButton>
+              </Badge>
+            </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>

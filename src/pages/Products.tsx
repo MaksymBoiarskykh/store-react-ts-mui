@@ -1,6 +1,5 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { ListProducts } from "../components/ListProducts";
-import { useActions } from "../hooks/useAction";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { Sidebar } from "../components/Sidebar";
 import Box from "@mui/material/Box";
@@ -10,12 +9,14 @@ import { CircularProgress } from "@mui/material";
 import { useFiltering } from "../hooks/useFiltering";
 import { IProduct } from "../models/IProduct";
 import { useScreenSize } from "../hooks/useScreenSize";
+import { productsApi } from "../store/reducers/api/productsApi";
 
 export const Products: FC = () => {
-  const { fetchProducts } = useActions();
-  const { products, isLoading } = useTypedSelector(
-    (state) => state.productsReducer
-  );
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = productsApi.useFetchProductsQuery("");
   const { open } = useTypedSelector((state) => state.sidebarReducer);
   const [category, setCategory] = useState("");
   const [rating, setRating] = useState<number | null>(null);
@@ -34,17 +35,16 @@ export const Products: FC = () => {
     setPriceRange(newValue as number[]);
   };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   const filteredProducts: IProduct[] = useFiltering(
     rating,
     category,
     priceRange,
-    products
+    products as IProduct[]
   );
 
+  if (error) {
+    return <h1>error</h1>;
+  }
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />

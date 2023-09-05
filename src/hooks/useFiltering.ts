@@ -5,7 +5,7 @@ export const useFiltering = (
   rating: number | null,
   category: string,
   priceRange: number[],
-  data: IProduct[]
+  data: IProduct[] = []
 ): IProduct[] => {
   const sortedData = useMemo(() => {
     if (rating) {

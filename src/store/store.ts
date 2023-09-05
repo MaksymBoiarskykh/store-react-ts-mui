@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { productsReducer } from "./reducers/products/productsSlice";
 import { basketProductsReducer } from "./reducers/basketProducts/basketProductsSlice";
 import { sidebarReducer } from "./reducers/sidebar/sidebarSlice";
 import storage from "redux-persist/lib/storage";
@@ -13,15 +12,15 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import { productsApi } from "./reducers/api/productsApi";
 
 const persistConfig = {
   key: "root",
   storage,
-  // blackList: [productsReducer.name, basketProductsReducer.name],
 };
 
 const rootReducer = combineReducers({
-  productsReducer,
+  [productsApi.reducerPath]: productsApi.reducer,
   basketProductsReducer,
   sidebarReducer,
 });
@@ -34,12 +33,11 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(productsApi.middleware),
 });
 
 export const persistor = persistStore(store);
 
-// типы для кастомных useDispatch, useSelector
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = typeof store;
 export type AppDispatch = AppStore["dispatch"];

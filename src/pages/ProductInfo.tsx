@@ -6,16 +6,18 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import BasketButton from "../components/BasketButton";
+import { productsApi } from "../store/reducers/api/productsApi";
 
 interface IParam {
   id: string | undefined;
 }
 
 export const ProductInfo = () => {
-  const { products } = useTypedSelector((state) => state.productsReducer);
+  const { data: products } = productsApi.useFetchProductsQuery("");
+  // const { products } = useTypedSelector((state) => state.productsReducer);
   const param = useParams<{ id: string | undefined }>() as IParam;
 
-  if (!param.id) {
+  if (!param.id || !products) {
     return (
       <Container sx={{ mt: 10 }}>
         <Typography variant="h3" component="div">

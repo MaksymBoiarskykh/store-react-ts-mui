@@ -1,4 +1,4 @@
-import { productsActionCreators } from "./products/productsActionCreators";
+// import { productsActionCreators } from "./products/productsActionCreators";
 import { changeSidebarStatus } from "./sidebar/sidebarSlice";
 import {
   selectProduct,
@@ -7,7 +7,7 @@ import {
 
 // собираем все action creators для передачи его в кастомный хук useAction
 export const allActionCreators = {
-  ...productsActionCreators,
+  // ...productsActionCreators,
   selectProduct,
   removeProduct,
   changeSidebarStatus,

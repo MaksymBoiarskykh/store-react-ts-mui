@@ -2,7 +2,7 @@ import { Container, Typography } from "@mui/material";
 import { BasketTable } from "../components/BasketTable";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 
-export default function BasicTable() {
+export const Basket = () => {
   const { idProducts } = useTypedSelector(
     (state) => state.basketProductsReducer
   );
@@ -17,4 +17,4 @@ export default function BasicTable() {
       )}
     </Container>
   );
-}
+};

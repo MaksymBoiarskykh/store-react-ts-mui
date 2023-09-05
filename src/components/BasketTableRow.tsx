@@ -7,17 +7,22 @@ import {
 } from "@mui/material";
 import { ChangeEvent, FC, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useAction";
+import { productsApi } from "../store/reducers/api/productsApi";
+import { error } from "console";
 
 interface IBasketTableCell {
   id: number;
 }
 
 export const BasketTableRow: FC<IBasketTableCell> = ({ id }) => {
-  const { products } = useTypedSelector((state) => state.productsReducer);
+  const { data: products, error } = productsApi.useFetchProductsQuery("");
   const { removeProduct } = useActions();
   const [number, setNumber] = useState(1);
+
+  if (error || !products) {
+    return <h1>error</h1>;
+  }
 
   return (
     <>
