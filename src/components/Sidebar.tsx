@@ -30,7 +30,7 @@ export const Sidebar: FC<ISidebar> = ({
   rating,
 }) => {
   return (
-    <form>
+    <form style={{ maxWidth: "250px" }}>
       <FormControl>
         <FormLabel>Category</FormLabel>
         <RadioGroup
@@ -47,7 +47,7 @@ export const Sidebar: FC<ISidebar> = ({
           ))}
         </RadioGroup>
       </FormControl>
-      <Box sx={{ mt: 3 }}>
+      <FormControl sx={{ mt: 3 }}>
         <Typography component="legend">Rating</Typography>
         <Rating
           value={rating}
@@ -55,8 +55,8 @@ export const Sidebar: FC<ISidebar> = ({
             setRating(newValue);
           }}
         />
-      </Box>
-      <Box sx={{ width: "90%", mt: 3 }}>
+      </FormControl>
+      <FormControl sx={{ width: "90%", mt: 3 }}>
         <Typography component="legend">Price Range</Typography>
         <Slider
           getAriaLabel={() => "Temperature range"}
@@ -66,7 +66,7 @@ export const Sidebar: FC<ISidebar> = ({
           value={priceRange}
           onChange={(_, newValue) => handleChange(newValue)}
         />
-      </Box>
+      </FormControl>
     </form>
   );
 };

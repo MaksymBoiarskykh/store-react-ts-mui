@@ -1,10 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { Button, Container, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import BasketButton from "../components/BasketButton";
 

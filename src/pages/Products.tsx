@@ -26,7 +26,7 @@ export const Products: FC = () => {
     if (value === "all") {
       setCategory("");
     } else {
-      setCategory(`/category/${value}`);
+      setCategory(value);
     }
   };
 
@@ -35,11 +35,12 @@ export const Products: FC = () => {
   };
 
   useEffect(() => {
-    fetchProducts(category);
-  }, [category]);
+    fetchProducts();
+  }, []);
 
   const filteredProducts: IProduct[] = useFiltering(
     rating,
+    category,
     priceRange,
     products
   );
@@ -51,10 +52,10 @@ export const Products: FC = () => {
         variant="persistent"
         open={isBigSize || open}
         sx={{
-          width: isBigSize ? 260 : "none",
+          width: isBigSize ? 230 : "none",
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: isBigSize ? 260 : "none",
+            width: isBigSize ? 230 : "none",
             boxSizing: "border-box",
           },
         }}

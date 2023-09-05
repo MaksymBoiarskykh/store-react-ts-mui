@@ -3,6 +3,7 @@ import { IProduct } from "../models/IProduct";
 
 export const useFiltering = (
   rating: number | null,
+  category: string,
   priceRange: number[],
   data: IProduct[]
 ): IProduct[] => {
@@ -15,8 +16,11 @@ export const useFiltering = (
         (el) => el.price >= priceRange[0] && el.price <= priceRange[1]
       );
     }
+    if (category) {
+      data = data.filter((el) => el.category === category);
+    }
     return data;
-  }, [rating, priceRange, data]);
+  }, [rating, priceRange, data, category]);
 
   return sortedData;
 };

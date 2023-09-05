@@ -19,8 +19,6 @@ export const BasketTableRow: FC<IBasketTableCell> = ({ id }) => {
   const { removeProduct } = useActions();
   const [number, setNumber] = useState(1);
 
-  console.log(id, products);
-
   return (
     <>
       <TableRow

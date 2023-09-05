@@ -1,14 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { isBigSize } from "../../../hooks/useScreenSize";
 
 interface SidebarState {
   open: boolean;
-  //   isBigScreen: boolean;
 }
 
 const initialState: SidebarState = {
   open: false,
-  //   isBigScreen: isBigSize,
 };
 
 export const sidebarSlice = createSlice({
