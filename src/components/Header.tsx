@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { ShoppingBasket } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Badge } from "@mui/material";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useAction";
@@ -19,12 +19,14 @@ export const Header = () => {
   const isBigSize = useScreenSize();
   const { changeSidebarStatus } = useActions();
   let location = useLocation();
+  const isProducts =
+    location.pathname === "/products" || location.pathname === "/";
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{ zIndex: 1201 }}>
         <Toolbar>
-          {!isBigSize && location.pathname === "/products" && (
+          {!isBigSize && isProducts && (
             <IconButton
               onClick={() => changeSidebarStatus()}
               size="large"
@@ -35,23 +37,23 @@ export const Header = () => {
               <FilterAltIcon />
             </IconButton>
           )}
-          <Link className="link" to="/products">
+          <NavLink className="link" to="/products">
             <Typography variant="h6" component="div" sx={{ mr: 5 }}>
               Products
             </Typography>
-          </Link>
+          </NavLink>
           <Typography
             variant="h6"
             component="div"
             sx={{ flexGrow: 1 }}
           ></Typography>
-          <Link className="link" to="/basket">
+          <NavLink className="link" to="/basket">
             <IconButton color="inherit">
               <Badge badgeContent={idProducts.length} color="secondary">
                 <ShoppingBasket />
               </Badge>
             </IconButton>
-          </Link>
+          </NavLink>
         </Toolbar>
       </AppBar>
     </Box>
