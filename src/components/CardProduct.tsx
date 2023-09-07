@@ -6,15 +6,21 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { IProduct } from "../models/IProduct";
-import { FC } from "react";
+import { FC, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import BasketButton from "./BasketButton";
+import { styled } from "@mui/material/styles";
+
+const BoxStyled = styled(Box)(() => ({
+  display: "flex",
+  alignItems: "center",
+}));
 
 interface ICardProduct {
   product: IProduct;
 }
 
-export const CardProduct: FC<ICardProduct> = ({ product }) => {
+const CardProduct: FC<ICardProduct> = ({ product }) => {
   const navigate = useNavigate();
 
   return (
@@ -28,14 +34,12 @@ export const CardProduct: FC<ICardProduct> = ({ product }) => {
             pb: 2,
           }}
         >
-          <Box
+          <BoxStyled
             sx={{
               height: "200px",
               width: "100%",
               mt: 1,
-              display: "flex",
               justifyContent: "center",
-              alignItems: "center",
             }}
           >
             <CardMedia
@@ -47,26 +51,20 @@ export const CardProduct: FC<ICardProduct> = ({ product }) => {
               }}
               image={product.image}
             />
-          </Box>
+          </BoxStyled>
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography gutterBottom variant="h6" component="div">
               {product.title}
             </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
+            <BoxStyled sx={{ justifyContent: "space-between" }}>
               <Typography variant="h5" color="text.secondary">
-                {product.price}₴
+                {product.price}$
               </Typography>
               <Rating value={product.rating.rate} readOnly />
-            </Box>
+            </BoxStyled>
           </CardContent>
           <CardActions>
-            <BasketButton id={+product.id - 1}>Add to basket</BasketButton>
+            <BasketButton id={+product.id - 1} />
             <Button
               size="small"
               variant="outlined"
@@ -81,3 +79,5 @@ export const CardProduct: FC<ICardProduct> = ({ product }) => {
     </>
   );
 };
+
+export default memo(CardProduct);

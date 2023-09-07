@@ -7,14 +7,16 @@ import { FC, useState } from "react";
 
 interface IBasketButton {
   id: number;
-  children: string;
 }
 
-export const BasketButton: FC<IBasketButton> = ({ id, children }) => {
-  const { selectProduct } = useActions();
+type ICallback = (id: number) => void;
+
+const BasketButton: FC<IBasketButton> = ({ id }) => {
+  const { selectProduct, removeProduct } = useActions();
   const { idProducts } = useTypedSelector(
     (state) => state.basketProductsReducer
   );
+  const [added, setAdded] = useState(idProducts.some((el) => el === id));
 
   const [massage, setMassage] = useState<ISnackBar>({
     status: false,
@@ -25,16 +27,10 @@ export const BasketButton: FC<IBasketButton> = ({ id, children }) => {
     setMassage(value);
   };
 
-  const pushToBasket = () => {
-    if (!idProducts.some((el) => el === id)) {
-      selectProduct(id);
-      setMassage({ status: true, text: "product add to basket" });
-    } else {
-      setMassage({
-        status: true,
-        text: "product has already added to basket",
-      });
-    }
+  const createEvent = (callback: ICallback, massage: string) => {
+    callback(id);
+    setMassage({ status: true, text: massage });
+    setAdded(!added);
   };
 
   return (
@@ -42,10 +38,14 @@ export const BasketButton: FC<IBasketButton> = ({ id, children }) => {
       <Button
         size="small"
         variant="contained"
-        color="info"
-        onClick={pushToBasket}
+        color={added ? "success" : "info"}
+        onClick={() =>
+          added
+            ? createEvent(removeProduct, "remove from basket")
+            : createEvent(selectProduct, "add to basket")
+        }
       >
-        {children}
+        {added ? "remove product" : "add to basket"}
       </Button>
       <SnackbarMassage visible={massage} setVisible={changeMessageVisibility} />
     </>

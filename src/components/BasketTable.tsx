@@ -5,8 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-// import { useTypedSelector } from "../hooks/useTypedSelector";
-import { BasketTableRow } from "./BasketTableRow";
+import BasketTableRow from "./BasketTableRow";
 import { FC } from "react";
 
 const rows: string[] = ["image", "number", "price", "remove"];
@@ -35,5 +34,4 @@ export const BasketTable: FC<IBasketTable> = ({ idProducts }) => {
       </Table>
     </TableContainer>
   );
-  return <div>hello</div>;
 };

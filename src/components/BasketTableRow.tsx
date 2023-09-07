@@ -5,17 +5,24 @@ import {
   TableRow,
   TextField,
 } from "@mui/material";
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, memo, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { useActions } from "../hooks/useAction";
 import { productsApi } from "../store/reducers/api/productsApi";
-import { error } from "console";
+import { styled } from "@mui/material/styles";
+
+const AvatarStyled = styled(Avatar)(() => ({
+  display: "inline-block",
+  width: 50,
+  height: 70,
+  objectFit: "contain",
+}));
 
 interface IBasketTableCell {
   id: number;
 }
 
-export const BasketTableRow: FC<IBasketTableCell> = ({ id }) => {
+const BasketTableRow: FC<IBasketTableCell> = ({ id }) => {
   const { data: products, error } = productsApi.useFetchProductsQuery("");
   const { removeProduct } = useActions();
   const [number, setNumber] = useState(1);
@@ -31,16 +38,7 @@ export const BasketTableRow: FC<IBasketTableCell> = ({ id }) => {
         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       >
         <TableCell align="center">
-          <Avatar
-            sx={{
-              display: "inline-block",
-              width: 50,
-              height: 70,
-              objectFit: "contain",
-            }}
-            variant="square"
-            src={products[id].image}
-          />
+          <AvatarStyled variant="square" src={products[id].image} />
         </TableCell>
         <TableCell align="center">
           <TextField
@@ -62,3 +60,5 @@ export const BasketTableRow: FC<IBasketTableCell> = ({ id }) => {
     </>
   );
 };
+
+export default memo(BasketTableRow);

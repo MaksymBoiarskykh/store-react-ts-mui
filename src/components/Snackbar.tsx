@@ -30,7 +30,7 @@ export const SnackbarMassage: FC<ISnackbarMassage> = ({
     <div>
       <Snackbar
         open={visible.status}
-        autoHideDuration={6000}
+        autoHideDuration={1000}
         onClose={() => setVisible({ status: false })}
         message={visible.text}
         action={action}

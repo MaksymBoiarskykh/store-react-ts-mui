@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { ListProducts } from "../components/ListProducts";
+import ListProducts from "../components/ListProducts";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { Sidebar } from "../components/Sidebar";
 import Box from "@mui/material/Box";

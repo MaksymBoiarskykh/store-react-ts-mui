@@ -3,8 +3,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { FC, useState } from "react";
-import { Box, Rating, Slider, Typography } from "@mui/material";
+import { FC } from "react";
+import { Rating, Slider, Typography } from "@mui/material";
 
 const categories: string[] = [
   "all",
@@ -59,7 +59,6 @@ export const Sidebar: FC<ISidebar> = ({
       <FormControl sx={{ width: "90%", mt: 3 }}>
         <Typography component="legend">Price Range</Typography>
         <Slider
-          getAriaLabel={() => "Temperature range"}
           max={1000}
           min={0}
           valueLabelDisplay="auto"

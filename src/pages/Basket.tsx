@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import { BasketTable } from "../components/BasketTable";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 
@@ -7,7 +7,7 @@ export const Basket = () => {
     (state) => state.basketProductsReducer
   );
   return (
-    <Container sx={{ mt: 10 }}>
+    <Container sx={{ margin: "80px auto 30px" }}>
       {idProducts.length ? (
         <BasketTable idProducts={idProducts} />
       ) : (
@@ -15,6 +15,9 @@ export const Basket = () => {
           isn't any products
         </Typography>
       )}
+      <Button variant="contained" color="info" sx={{ width: "100%", mt: 1 }}>
+        buy
+      </Button>
     </Container>
   );
 };

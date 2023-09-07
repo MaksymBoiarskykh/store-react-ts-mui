@@ -1,12 +1,22 @@
 import { useParams } from "react-router-dom";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { Container, Typography } from "@mui/material";
-
+import { Container, Grid, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import BasketButton from "../components/BasketButton";
 import { productsApi } from "../store/reducers/api/productsApi";
+import { styled } from "@mui/material/styles";
+
+const PhotoBlock = styled(Grid)(({ theme }) => ({
+  [theme.breakpoints.up("xs")]: {
+    display: "flex",
+    justifyContent: "center",
+  },
+
+  [theme.breakpoints.up("md")]: {
+    justifyContent: "end",
+  },
+  margin: "0 auto",
+}));
 
 interface IParam {
   id: string | undefined;
@@ -14,7 +24,6 @@ interface IParam {
 
 export const ProductInfo = () => {
   const { data: products } = productsApi.useFetchProductsQuery("");
-  // const { products } = useTypedSelector((state) => state.productsReducer);
   const param = useParams<{ id: string | undefined }>() as IParam;
 
   if (!param.id || !products) {
@@ -31,14 +40,11 @@ export const ProductInfo = () => {
 
   return (
     <Container sx={{ mt: 10 }}>
-      <Card
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          p: 2,
-        }}
-      >
-        <Box
+      <Grid container spacing={4} sx={{ justifyContent: "space-between" }}>
+        <Grid
+          item
+          xs={12}
+          md={9}
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -56,25 +62,26 @@ export const ProductInfo = () => {
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: "space-between",
               width: "100%",
               mb: 1,
             }}
           >
-            <Typography variant="h5">price: {products[id].price}₴</Typography>
+            <Typography variant="h5">price: {products[id].price}$</Typography>
             <Typography variant="h5">
               rating: {products[id].rating.rate}/5
             </Typography>
           </Box>
-          <BasketButton id={+param.id}>Add to basket</BasketButton>
-        </Box>
-        <CardMedia
-          component="img"
-          sx={{ maxWidth: "25%", width: "200px" }}
-          image={products[id].image}
-          alt="Live from space album cover"
-        />
-      </Card>
+          <BasketButton id={+param.id} />
+        </Grid>
+        <PhotoBlock item xs={8} md={3}>
+          <CardMedia
+            component="img"
+            sx={{ maxHeight: "250px", width: "auto" }}
+            image={products[id].image}
+          />
+        </PhotoBlock>
+      </Grid>
     </Container>
   );
 };

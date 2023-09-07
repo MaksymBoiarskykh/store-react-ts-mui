@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import { ShoppingBasket } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
@@ -11,6 +10,7 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useAction";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { useScreenSize } from "../hooks/useScreenSize";
+import { useLocation } from "react-router-dom";
 
 export const Header = () => {
   const { idProducts } = useTypedSelector(
@@ -18,12 +18,13 @@ export const Header = () => {
   );
   const isBigSize = useScreenSize();
   const { changeSidebarStatus } = useActions();
+  let location = useLocation();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{ zIndex: 1201 }}>
         <Toolbar>
-          {!isBigSize && (
+          {!isBigSize && location.pathname === "/products" && (
             <IconButton
               onClick={() => changeSidebarStatus()}
               size="large"

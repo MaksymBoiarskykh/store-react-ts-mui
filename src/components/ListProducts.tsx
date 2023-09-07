@@ -1,13 +1,13 @@
 import { Container, Grid, Typography } from "@mui/material";
 import { IProduct } from "../models/IProduct";
-import { FC } from "react";
-import { CardProduct } from "./CardProduct";
+import { FC, memo } from "react";
+import CardProduct from "./CardProduct";
 
 interface IListProducts {
   products: IProduct[];
 }
 
-export const ListProducts: FC<IListProducts> = ({ products }) => {
+const ListProducts: FC<IListProducts> = ({ products }) => {
   return (
     <>
       <Container>
@@ -30,3 +30,5 @@ export const ListProducts: FC<IListProducts> = ({ products }) => {
     </>
   );
 };
+
+export default memo(ListProducts);
