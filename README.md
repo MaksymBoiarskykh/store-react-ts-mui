@@ -1,3 +1,6 @@
+This is an online store that receives products using the Rest API. They can be sorted, filtered, and viewed by category. You can also add a product to a basket or view product information
+
+
 I used technologies: create-react-app, typescript, react, redux toolkit, rtk query, redux persist, react-router, fake store API, MUI.
 
 
